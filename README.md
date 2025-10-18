@@ -57,7 +57,9 @@ open LibreChat-ios.xcworkspace  # If using CocoaPods
 
 ## 🛠️ Development
 
-### Project Structure
+### Planned Project Structure
+
+The project will follow this structure:
 
 ```
 LibreChat-ios/
@@ -69,6 +71,8 @@ LibreChat-ios/
 ├── Utilities/             # Helper functions and extensions
 └── Resources/             # Assets, fonts, and other resources
 ```
+
+*Note: This is an early-stage project. The structure above represents the intended architecture.*
 
 ### Building
 
@@ -83,7 +87,12 @@ xcodebuild -scheme LibreChat-ios -configuration Debug
 Run tests using:
 
 ```bash
-xcodebuild test -scheme LibreChat-ios -destination 'platform=iOS Simulator,name=iPhone 15'
+xcodebuild test -scheme LibreChat-ios -destination 'platform=iOS Simulator,OS=latest,name=iPhone 15 Pro'
+```
+
+Or use any available simulator:
+```bash
+xcodebuild test -scheme LibreChat-ios -destination 'platform=iOS Simulator'
 ```
 
 ## 🤝 Contributing
