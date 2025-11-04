@@ -41,10 +41,6 @@ cd LibreChat-ios
 ```bash
 open LibreChat-ios.xcodeproj
 ```
-or
-```bash
-open LibreChat-ios.xcworkspace  # If using CocoaPods
-```
 
 3. Build and run the project on your device or simulator
 
@@ -73,52 +69,3 @@ LibreChat-ios/
 ```
 
 *Note: This is an early-stage project. The structure above represents the intended architecture.*
-
-### Building
-
-To build the project:
-
-```bash
-xcodebuild -scheme LibreChat-ios -configuration Debug
-```
-
-### Testing
-
-Run tests using:
-
-```bash
-xcodebuild test -scheme LibreChat-ios -destination 'platform=iOS Simulator,OS=latest,name=iPhone 15 Pro'
-```
-
-Or use any available simulator:
-```bash
-xcodebuild test -scheme LibreChat-ios -destination 'platform=iOS Simulator'
-```
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- Inspired by [LibreChat](https://github.com/danny-avila/LibreChat)
-- Built with SwiftUI
-- Thanks to all contributors and supporters
-
-## 📧 Contact
-
-For questions, suggestions, or issues, please open an issue on GitHub.
-
----
-
-Made with ❤️ for the iOS community
