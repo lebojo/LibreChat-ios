@@ -50,22 +50,3 @@ open LibreChat-ios.xcodeproj
 2. Navigate to Settings
 3. Add your API key(s) for the AI provider(s) you want to use
 4. Start chatting!
-
-## 🛠️ Development
-
-### Planned Project Structure
-
-The project will follow this structure:
-
-```
-LibreChat-ios/
-├── App/                    # App entry point and configuration
-├── Views/                  # SwiftUI views and UI components
-├── ViewModels/            # View models and business logic
-├── Models/                # Data models and entities
-├── Services/              # API clients and service layers
-├── Utilities/             # Helper functions and extensions
-└── Resources/             # Assets, fonts, and other resources
-```
-
-*Note: This is an early-stage project. The structure above represents the intended architecture.*
