@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import FoundationModels
 
 struct Message: Identifiable, Hashable {
     let id: UUID = UUID()
     let role: Role
-    let text: String
+    var text: String
     
     enum Role {
         case user
