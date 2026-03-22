@@ -20,17 +20,17 @@ struct ContentView: View {
     var body: some View {
         NavigationSplitView {
             ProviderListSidebar(
-                providers: providers,
                 selectedProvider: $selectedProvider,
                 showAddProvider: $showAddProvider,
+                providers: providers,
                 onDuplicate: duplicateProvider,
                 onDelete: deleteProvider
             )
         } content: {
             if let selectedProvider {
                 DiscussionListView(
-                    discussions: allDiscussions.filter { $0.provider?.id == selectedProvider.id },
                     selectedDiscussion: $selectedDiscussion,
+                    discussions: allDiscussions.filter { $0.provider?.id == selectedProvider.id },
                     onCreateDiscussion: { createDiscussion(for: selectedProvider) },
                     onDeleteDiscussion: deleteDiscussion
                 )
