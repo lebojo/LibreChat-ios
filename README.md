@@ -2,8 +2,8 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/platform-iOS-lightgrey" alt="Platform">
-  <img src="https://img.shields.io/badge/Swift-5.0+-orange" alt="Swift">
-  <img src="https://img.shields.io/badge/iOS-15.0+-blue" alt="iOS Version">
+  <img src="https://img.shields.io/badge/Swift-6.0+-orange" alt="Swift">
+  <img src="https://img.shields.io/badge/iOS-26.0+-blue" alt="iOS Version">
   <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
 </p>
 
@@ -16,15 +16,15 @@ A lightweight, native iOS user interface for AI chat interactions. LibreChat-ios
 - 🔐 Secure API key management
 - 📱 Optimized for iPhone and iPad
 - 🌓 Dark mode support
-- 💾 Local conversation history
+- 💾 Local conversation history with SwiftData
 - ⚡️ Fast and lightweight
 - 🔄 Support for multiple AI providers
 
 ## 📋 Requirements
 
-- iOS 15.0 or later
-- Xcode 14.0 or later
-- Swift 5.0 or later
+- iOS 26.0 or later
+- Xcode 17.0 or later
+- Swift 6.0 or later
 - An active API key from supported AI providers
 
 ## 🚀 Getting Started
