@@ -9,6 +9,8 @@
 
 A lightweight, native iOS user interface for AI chat interactions. LibreChat-ios brings the power of AI conversations to your iOS device with a clean, intuitive interface.
 
+You can test it here: [TestFlight](https://testflight.apple.com/join/mA6jVQbG)
+
 ## ✨ Features
 
 - 🎨 Native iOS interface with SwiftUI
