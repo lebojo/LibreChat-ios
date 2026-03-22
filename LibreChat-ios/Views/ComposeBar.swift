@@ -25,7 +25,13 @@ struct ComposeBar: ViewModifier {
                         .disabled(isGenerating)
                 }
 
-                ToolbarSpacer(.flexible, placement: .bottomBar)
+                #if !os(visionOS)
+                    ToolbarSpacer(.flexible, placement: .bottomBar)
+                #else
+                    ToolbarItem(placement: .bottomBar) {
+                        Spacer()
+                    }
+                #endif
 
                 ToolbarItem(placement: .bottomBar) {
                     Button("Send", systemImage: "paperplane.fill") {
