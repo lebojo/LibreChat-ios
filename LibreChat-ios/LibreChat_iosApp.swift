@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct LibreChat_iosApp: App {
@@ -13,5 +14,6 @@ struct LibreChat_iosApp: App {
         WindowGroup {
             ContentView()
         }
+        .modelContainer(for: [SDProvider.self, SDDiscussion.self, SDMessage.self])
     }
 }

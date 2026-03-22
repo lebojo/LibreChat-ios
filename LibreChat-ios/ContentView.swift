@@ -6,45 +6,111 @@
 //
 
 import SwiftUI
-import FoundationModels
+import SwiftData
 
 struct ContentView: View {
-    @State private var discussions: [Discussion] = []
-    @State private var currentDiscussion: Discussion?
+    @Environment(\.modelContext) private var modelContext
+    @Query(sort: \SDProvider.name) private var providers: [SDProvider]
+    @Query(sort: \SDDiscussion.updatedAt, order: .reverse) private var allDiscussions: [SDDiscussion]
+
+    @State private var selectedProvider: SDProvider?
+    @State private var selectedDiscussion: SDDiscussion?
+    @State private var showAddProvider = false
 
     var body: some View {
         NavigationSplitView {
-            if !discussions.isEmpty {
-                List(discussions, id: \.id, selection: $currentDiscussion) { discussion in
-                    NavigationLink(discussion.shortDescription ?? "Empty conv", value: discussion)
-                }
-            } else {
-                VStack {
-                    Text("**Hey**,\nlooks like it's your first time here!")
-                        .padding()
-                    Button("Create a new discussion", systemImage: "plus") {
-                        discussions.append(Discussion())
-                        currentDiscussion = discussions.last
-                    }
-                    .buttonStyle(.borderedProminent)
-                }
-            }
+            ProviderListSidebar(
+                providers: providers,
+                selectedProvider: $selectedProvider,
+                showAddProvider: $showAddProvider,
+                onDuplicate: duplicateProvider,
+                onDelete: deleteProvider
+            )
         } content: {
-            if currentDiscussion != nil {
-                DiscussionView(
-                    discussion: Binding(
-                        get: { currentDiscussion! },
-                        set: { currentDiscussion = $0 }
-                    )
+            if let selectedProvider {
+                DiscussionListView(
+                    discussions: allDiscussions.filter { $0.provider?.id == selectedProvider.id },
+                    selectedDiscussion: $selectedDiscussion,
+                    onCreateDiscussion: { createDiscussion(for: selectedProvider) },
+                    onDeleteDiscussion: deleteDiscussion
                 )
+                .navigationTitle(selectedProvider.name)
             } else {
-                EmptyView()
+                ContentUnavailableView(
+                    "No Provider Selected",
+                    systemImage: "server.rack",
+                    description: Text("Select a provider to see its discussions.")
+                )
             }
         } detail: {
+            if let selectedDiscussion {
+                DiscussionView(discussion: selectedDiscussion)
+            } else {
+                ContentUnavailableView(
+                    "No Discussion Selected",
+                    systemImage: "bubble.left.and.bubble.right",
+                    description: Text("Select a discussion or create a new one.")
+                )
+            }
+        }
+        .task {
+            ensureAppleIntelligenceProvider()
         }
     }
-}
 
-#Preview {
-    ContentView()
+    private func ensureAppleIntelligenceProvider() {
+        let builtInProviders = providers.filter { $0.isBuiltIn }
+
+        if builtInProviders.isEmpty {
+            let provider = SDProvider(name: "Apple Intelligence", isBuiltIn: true)
+            modelContext.insert(provider)
+            return
+        }
+
+        // Merge duplicates created by CloudKit sync across devices
+        guard builtInProviders.count > 1 else { return }
+
+        let primary = builtInProviders[0]
+        for duplicate in builtInProviders.dropFirst() {
+            for discussion in duplicate.discussions ?? [] {
+                discussion.provider = primary
+            }
+            modelContext.delete(duplicate)
+        }
+
+        if selectedProvider?.isBuiltIn == true {
+            selectedProvider = primary
+        }
+    }
+
+    private func createDiscussion(for provider: SDProvider) {
+        let discussion = SDDiscussion(provider: provider)
+        modelContext.insert(discussion)
+        selectedDiscussion = discussion
+    }
+
+    private func deleteDiscussion(_ discussion: SDDiscussion) {
+        if selectedDiscussion?.id == discussion.id {
+            selectedDiscussion = nil
+        }
+        modelContext.delete(discussion)
+    }
+
+    private func duplicateProvider(_ provider: SDProvider) {
+        let duplicate = SDProvider(
+            name: provider.name,
+            baseURL: provider.baseURL,
+            bearerToken: provider.bearerToken,
+            modelName: provider.modelName,
+            authStyle: provider.authStyle
+        )
+        modelContext.insert(duplicate)
+    }
+
+    private func deleteProvider(_ provider: SDProvider) {
+        if selectedProvider?.id == provider.id {
+            selectedProvider = nil
+        }
+        modelContext.delete(provider)
+    }
 }
