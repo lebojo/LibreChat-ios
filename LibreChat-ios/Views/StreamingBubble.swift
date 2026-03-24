@@ -13,7 +13,6 @@ struct StreamingBubble: View {
     var body: some View {
         HStack {
             Text(text)
-                .padding(12)
                 .background(.fill.tertiary, in: .rect(cornerRadius: 16))
             Spacer(minLength: 60)
         }
