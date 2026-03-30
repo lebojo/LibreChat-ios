@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MessageListView: View {
-    let messages: [SDMessage]
+    let messages: [UIMessage]
     let streamingText: String
 
     var body: some View {
@@ -18,16 +18,19 @@ struct MessageListView: View {
                     emptyState
                 } else {
                     ForEach(messages) { message in
-                        MessageBubble(message: UIMessage(from: message))
+                        MessageBubble(message: message)
                     }
                     if !streamingText.isEmpty {
-                        StreamingBubble(text: streamingText)
+                        Text(streamingText.markdown)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.horizontal)
                     }
                 }
             }
             .padding(.vertical)
         }
         .defaultScrollAnchor(.bottom)
+        .animation(.default, value: streamingText)
     }
 
     private var emptyState: some View {

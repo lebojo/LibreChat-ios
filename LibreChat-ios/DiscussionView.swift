@@ -25,7 +25,7 @@ struct DiscussionView: View {
 
     var body: some View {
         MessageListView(
-            messages: sortedMessages,
+            messages: sortedMessages.map { UIMessage(from: $0) },
             streamingText: streamingText
         )
         .navigationTitle(discussion.title.isEmpty ? "New conversation" : discussion.title)

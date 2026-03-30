@@ -21,7 +21,8 @@ struct ComposeBar: ViewModifier {
         content
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
-                    TextField("Enter a message", text: $messageToSend)
+                    TextField("Enter a message", text: $messageToSend, axis: .vertical)
+                        .lineLimit(1...5)
                         .disabled(isGenerating)
                 }
 
