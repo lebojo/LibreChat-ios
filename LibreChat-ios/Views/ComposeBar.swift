@@ -39,6 +39,7 @@ struct ComposeBar: ViewModifier {
                         onSend()
                     }
                     .disabled(!canSend)
+                    .keyboardShortcut(.defaultAction)
                 }
             }
     }
