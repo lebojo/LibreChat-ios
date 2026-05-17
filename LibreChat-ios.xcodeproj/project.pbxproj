@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		17FD0A712FB880E60055C6C5 /* Textual in Frameworks */ = {isa = PBXBuildFile; productRef = 17FD0A702FB880E60055C6C5 /* Textual */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		1733EE2F2EA466AC00BE186C /* LibreChat-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LibreChat-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17FD0A712FB880E60055C6C5 /* Textual in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = "LibreChat-ios";
 			packageProductDependencies = (
+				17FD0A702FB880E60055C6C5 /* Textual */,
 			);
 			productName = "LibreChat-ios";
 			productReference = 1733EE2F2EA466AC00BE186C /* LibreChat-ios.app */;
@@ -111,6 +117,9 @@
 			);
 			mainGroup = 1733EE262EA466AC00BE186C;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				17FD0A6F2FB880E60055C6C5 /* XCRemoteSwiftPackageReference "textual" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1733EE302EA466AC00BE186C /* Products */;
 			projectDirPath = "";
@@ -371,6 +380,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		17FD0A6F2FB880E60055C6C5 /* XCRemoteSwiftPackageReference "textual" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gonzalezreal/textual";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		17FD0A702FB880E60055C6C5 /* Textual */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 17FD0A6F2FB880E60055C6C5 /* XCRemoteSwiftPackageReference "textual" */;
+			productName = Textual;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1733EE272EA466AC00BE186C /* Project object */;
 }
