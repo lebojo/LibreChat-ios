@@ -19,28 +19,38 @@ struct ComposeBar: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .toolbar {
-                ToolbarItem(placement: .bottomBar) {
-                    TextField("Enter a message", text: $messageToSend, axis: .vertical)
-                        .lineLimit(1...5)
-                        .disabled(isGenerating)
-                }
-
-                #if !os(visionOS)
-                    ToolbarSpacer(.flexible, placement: .bottomBar)
-                #else
-                    ToolbarItem(placement: .bottomBar) {
-                        Spacer()
-                    }
-                #endif
-
-                ToolbarItem(placement: .bottomBar) {
-                    Button("Send", systemImage: "paperplane.fill") {
-                        onSend()
-                    }
-                    .disabled(!canSend)
-                    .keyboardShortcut(.defaultAction)
-                }
+        #if !os(visionOS)
+        .toolbar {
+            ToolbarItem(placement: .bottomBar) {
+                TextField("Enter a message", text: $messageToSend, axis: .vertical)
+                    .lineLimit(1 ... 5)
+                    .disabled(isGenerating)
             }
+
+            ToolbarSpacer(.flexible, placement: .bottomBar)
+
+            ToolbarItem(placement: .bottomBar) {
+                Button("Send", systemImage: "paperplane.fill") {
+                    onSend()
+                }
+                .disabled(!canSend)
+                .keyboardShortcut(.defaultAction)
+            }
+        }
+        #else
+        .safeAreaInset(edge: .bottom) {
+                TextField("Enter a message", text: $messageToSend, axis: .vertical)
+                    .lineLimit(1 ... 5)
+                    .disabled(isGenerating)
+
+                Spacer()
+
+                Button("Send", systemImage: "paperplane.fill") {
+                    onSend()
+                }
+                .disabled(!canSend)
+                .keyboardShortcut(.defaultAction)
+            }
+        #endif
     }
 }
